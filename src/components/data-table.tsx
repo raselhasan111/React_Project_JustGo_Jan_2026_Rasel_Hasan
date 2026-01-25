@@ -9,6 +9,7 @@ interface DataTableProps<T> {
   columns: Column<T>[]
   isLoading?: boolean
   error?: Error | null
+  onRowClick?: (item: T) => void
 }
 
 export function DataTable<T extends object>({
@@ -16,6 +17,7 @@ export function DataTable<T extends object>({
   columns,
   isLoading,
   error,
+  onRowClick,
 }: DataTableProps<T>) {
   if (isLoading) {
     return (
@@ -58,7 +60,13 @@ export function DataTable<T extends object>({
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className="hover:bg-gray-50 transition-colors">
+            <tr
+              key={index}
+              onClick={() => onRowClick?.(item)}
+              className={`hover:bg-gray-50 transition-colors ${
+                onRowClick ? 'cursor-pointer' : ''
+              }`}
+            >
               {columns.map((column) => (
                 <td
                   key={column.key}
