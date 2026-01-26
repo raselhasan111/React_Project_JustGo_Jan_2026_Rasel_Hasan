@@ -1,3 +1,5 @@
+import { useDeferredValue } from 'react'
+
 interface Column<T> {
   key: string
   header: string
@@ -19,6 +21,8 @@ export function DataTable<T extends object>({
   error,
   onRowClick,
 }: DataTableProps<T>) {
+  const deferredData = useDeferredValue(data)
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -35,7 +39,7 @@ export function DataTable<T extends object>({
     )
   }
 
-  if (data.length === 0) {
+  if (deferredData.length === 0) {
     return (
       <div className="flex items-center justify-center p-8">
         <p className="text-gray-600">No data available</p>
@@ -59,7 +63,7 @@ export function DataTable<T extends object>({
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {deferredData.map((item, index) => (
             <tr
               key={index}
               onClick={() => onRowClick?.(item)}
