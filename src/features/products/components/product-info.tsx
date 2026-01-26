@@ -1,16 +1,20 @@
 import { type Product } from '../../../api/products'
+import { useCurrency } from '../../../hooks/use-currency'
 
 interface ProductInfoProps {
   product: Product
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
+  const { symbol } = useCurrency()
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-4xl font-bold text-gray-900">{product.title}</h1>
       <div className="flex items-center gap-2">
         <span className="text-2xl font-semibold text-blue-600">
-          ${product.price ? product.price.toFixed(2) : '0.00'}
+          {symbol}
+          {product.price ? product.price.toFixed(2) : '0.00'}
         </span>
         {product.discountPercentage && (
           <span className="text-sm text-green-600 bg-green-100 px-2 py-1 rounded">
