@@ -56,3 +56,11 @@ export async function fetchProducts(): Promise<ProductsResponse> {
   }
   return response.json()
 }
+
+export async function fetchProductById(id: string): Promise<Product> {
+  const response = await fetch(`${API_BASE_URL}/products/${id}`)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch product with ID: ${id}`)
+  }
+  return response.json()
+}

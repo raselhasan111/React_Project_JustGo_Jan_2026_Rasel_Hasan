@@ -1,12 +1,20 @@
 import { useQuery } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import { fetchProducts, type Product } from '../../api/products'
 import { DataTable } from '../../components/data-table'
 
+export { ProductDetails } from './product-details'
+
 export function ProductsList() {
+  const navigate = useNavigate()
   const { data, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   })
+
+  const handleRowClick = (product: Product) => {
+    navigate(`/products/${product.id}`)
+  }
 
   const columns = [
     {
@@ -44,6 +52,7 @@ export function ProductsList() {
       columns={columns}
       isLoading={isLoading}
       error={error}
+      onRowClick={handleRowClick}
     />
   )
 }
