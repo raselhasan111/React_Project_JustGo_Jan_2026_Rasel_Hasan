@@ -49,8 +49,11 @@ export interface ProductsResponse {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-export async function fetchProducts(): Promise<ProductsResponse> {
-  const response = await fetch(`${API_BASE_URL}/products`)
+export async function fetchProducts(query?: string): Promise<ProductsResponse> {
+  const url = query
+    ? `${API_BASE_URL}/products/search?q=${query}`
+    : `${API_BASE_URL}/products`
+  const response = await fetch(url)
   if (!response.ok) {
     throw new Error('Failed to fetch products')
   }

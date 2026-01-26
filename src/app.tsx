@@ -3,7 +3,7 @@ import Categories from './pages/categories'
 import HomePage from './pages/home-page'
 import ProductDetailsPage from './pages/product-details-page'
 import ProductsPage from './pages/products-page'
-import Search from './pages/search'
+import ProductsSearchPage from './pages/products-search-page'
 import Settings from './pages/settings'
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetailsPage />} />
         <Route path="/products/categories" element={<Categories />} />
-        <Route path="/products/search" element={<Search />} />
+        <Route path="/products/search" element={<ProductsSearchPage />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
