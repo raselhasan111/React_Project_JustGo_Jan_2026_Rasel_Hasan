@@ -12,7 +12,8 @@ import { ProductFilters } from './product-filters'
 export { ProductDetails } from './product-details'
 
 export function ProductsList() {
-  const { category, setCategory } = useProductParams()
+  const { category, setCategory, sortBy, sortOrder, setSort } =
+    useProductParams()
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['products', category],
@@ -20,7 +21,10 @@ export function ProductsList() {
       category ? fetchProductsByCategory(category) : fetchProducts(),
   })
 
-  const { columns, handleRowClick } = useProducts()
+  const { columns, handleRowClick, getSortedData } = useProducts()
+
+  const products = data?.products ?? []
+  const displayData = getSortedData(products, sortBy, sortOrder)
 
   return (
     <div className="space-y-6">
@@ -31,12 +35,15 @@ export function ProductsList() {
         />
       </div>
       <DataTable<Product>
-        data={data?.products ?? []}
+        data={displayData}
         columns={columns}
         isLoading={isLoading}
         error={error}
         onRowClick={handleRowClick}
         rowKey="id"
+        onSort={(key, direction) => setSort(key, direction)}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
       />
     </div>
   )

@@ -7,7 +7,7 @@ import { useProducts } from './hooks/use-products'
 import { useProductParams } from './hooks/use-product-params'
 
 export function ProductsSearch() {
-  const { query, setSearch } = useProductParams()
+  const { query, setSearch, sortBy, sortOrder, setSort } = useProductParams()
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['products-search', query],
@@ -15,7 +15,10 @@ export function ProductsSearch() {
     enabled: true,
   })
 
-  const { columns, handleRowClick } = useProducts()
+  const { columns, handleRowClick, getSortedData } = useProducts()
+
+  const products = data?.products ?? []
+  const displayData = getSortedData(products, sortBy, sortOrder)
 
   return (
     <div className="space-y-6">
@@ -32,12 +35,15 @@ export function ProductsSearch() {
       </div>
 
       <DataTable<Product>
-        data={data?.products ?? []}
+        data={displayData}
         columns={columns}
         isLoading={isLoading}
         error={error}
         onRowClick={handleRowClick}
         rowKey="id"
+        onSort={(key, direction) => setSort(key, direction)}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
       />
     </div>
   )

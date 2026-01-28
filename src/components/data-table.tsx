@@ -1,9 +1,12 @@
 import { useDeferredValue } from 'react'
 
+export type SortDirection = 'asc' | 'desc' | null
+
 interface Column<T> {
   key: string
   header: string
   render?: (item: T) => React.ReactNode
+  sortable?: boolean
 }
 
 interface DataTableProps<T> {
@@ -13,6 +16,9 @@ interface DataTableProps<T> {
   error?: Error | null
   onRowClick?: (item: T) => void
   rowKey: keyof T
+  onSort?: (key: string, direction: SortDirection) => void
+  sortBy?: string
+  sortOrder?: SortDirection
 }
 
 export function DataTable<T extends object>({
@@ -22,8 +28,25 @@ export function DataTable<T extends object>({
   error,
   onRowClick,
   rowKey,
+  onSort,
+  sortBy,
+  sortOrder,
 }: DataTableProps<T>) {
   const deferredData = useDeferredValue(data)
+
+  const handleSort = (columnKey: string) => {
+    let newDirection: SortDirection = 'asc'
+
+    if (sortBy === columnKey) {
+      if (sortOrder === 'asc') {
+        newDirection = 'desc'
+      } else if (sortOrder === 'desc') {
+        newDirection = null
+      }
+    }
+
+    onSort?.(columnKey, newDirection)
+  }
 
   if (isLoading) {
     return (
@@ -57,9 +80,25 @@ export function DataTable<T extends object>({
             {columns.map((column) => (
               <th
                 key={column.key}
-                className="border border-gray-300 px-4 py-2 text-left font-semibold"
+                className={`border border-gray-300 px-4 py-2 text-left font-semibold ${
+                  column.sortable
+                    ? 'cursor-pointer select-none hover:bg-gray-200'
+                    : ''
+                }`}
+                onClick={() => column.sortable && handleSort(column.key)}
               >
-                {column.header}
+                <div className="flex items-center gap-2">
+                  {column.header}
+                  {column.sortable && (
+                    <span className="text-lg">
+                      {sortBy === column.key
+                        ? sortOrder === 'asc'
+                          ? '↑'
+                          : '↓'
+                        : '↕'}
+                    </span>
+                  )}
+                </div>
               </th>
             ))}
           </tr>
