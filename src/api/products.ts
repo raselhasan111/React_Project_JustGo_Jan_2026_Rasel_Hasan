@@ -49,13 +49,38 @@ export interface ProductsResponse {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-export async function fetchProducts(query?: string): Promise<ProductsResponse> {
+export async function fetchProducts(options?: {
+  query?: string
+}): Promise<ProductsResponse> {
+  const { query } = options || {}
+
   const url = query
     ? `${API_BASE_URL}/products/search?q=${query}`
     : `${API_BASE_URL}/products`
+
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error('Failed to fetch products')
+  }
+  return response.json()
+}
+
+export async function fetchProductsByCategory(
+  category: string
+): Promise<ProductsResponse> {
+  const url = `${API_BASE_URL}/products/category/${category}`
+
+  const response = await fetch(url)
+  if (!response.ok) {
+    throw new Error('Failed to fetch products by category')
+  }
+  return response.json()
+}
+
+export async function fetchCategories(): Promise<string[]> {
+  const response = await fetch(`${API_BASE_URL}/products/category-list`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch categories')
   }
   return response.json()
 }
