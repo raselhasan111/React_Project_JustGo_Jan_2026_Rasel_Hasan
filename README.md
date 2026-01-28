@@ -1,73 +1,43 @@
-# React + TypeScript + Vite
+# React Coding Assignment (Frontend Engineer Role) - JustGo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## How to Run
 
-Currently, two official plugins are available:
+1. **Install Dependencies**: 
+   Ensure you have [pnpm](https://pnpm.io/installation) installed. Run the following command:
+   ```bash
+   pnpm install
+   ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. **Environment Setup**:
+   Copy `.env.example` to a new file named `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Open `.env.local` and replace `replace_with_api_base_url` with the actual API base URL.
 
-## React Compiler
+3. **Start Development Server**:
+   ```bash
+   pnpm dev
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Technical Questions & Trade-offs
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. What trade-offs did you consciously make due to time constraints?
+- **Loading Skeletons**: Skipped implementing loading skeletons to prioritize core functionalities first.
+- **Responsiveness**: Adopted a desktop-first approach. While the layout supports basic responsiveness, detailed device-specific refinements can be done in the future iterations.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. If this app needed to scale, what would you refactor first?
+- **Feature-First Architecture**: Reorganize global assets (shared hooks, components, services, and types) into their respective feature domains to better align with a feature-centric structure. This would include:
+  - Consolidate feature-specific resources.
+  - Introducing clearer service boundaries for API interactions.
+- **Shared UI Library**: Extract reusable UI components into a well-documented design system or component library for consistency and reuse.
+- **Pre-commit hooks**: Implement pre-commit hooks to enforce code quality and formatting standards.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 3. Did you use AI tools?
+**Yes**, I used AI tools (Copilot in WebStorm and Antigravity, like gemini and claude) for:
+- Implementing reusable UI components and custom hooks based on requirements.
+- Writing and integrating service/api layers for data fetching.
+- Refactoring UI code and identifying potential issues early.
+- **Verification**: All AI generated code was carefully reviewed line by line and manually tested in the browser by me to ensure correctness.
