@@ -1,6 +1,6 @@
+import { NAV_LINKS } from '@/constants/navigation'
+import { getActiveLink } from '@/utils/navigation-utils'
 import { NavLink, useLocation } from 'react-router-dom'
-import { NAV_LINKS } from '../../constants/navigation'
-import { getActiveLink } from '../../utils/navigation-utils'
 
 export function TopNav() {
   const location = useLocation()

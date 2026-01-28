@@ -1,6 +1,6 @@
-import { CurrencySettings } from '../features/settings/components/currency-settings'
+import { CurrencySettings } from '@/features/settings/components/currency-settings'
 
-function Settings() {
+function SettingsPage() {
   return (
     <div className="mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Settings</h1>
@@ -9,4 +9,4 @@ function Settings() {
   )
 }
 
-export default Settings
+export default SettingsPage

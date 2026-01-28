@@ -1,6 +1,6 @@
+import { fetchProducts, fetchProductsByCategory } from '@/api/products'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { fetchProducts, fetchProductsByCategory } from '../../../api/products'
 
 const ITEMS_PER_PAGE = 20
 

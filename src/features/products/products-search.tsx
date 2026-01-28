@@ -1,11 +1,11 @@
-import { type Product } from '../../api/products'
-import { DataTable } from '../../components/data-table'
-import { InfiniteScrollFooter } from '../../components/infinite-scroll-footer'
-import { SearchInput } from '../../components/search-input'
-import { useInfiniteScroll } from './hooks/use-infinite-scroll'
-import { useProducts } from './hooks/use-products'
+import { type Product } from '@/api/products'
+import { DataTable } from '@/components/data-table'
+import { InfiniteScrollFooter } from '@/components/infinite-scroll-footer'
+import { SearchInput } from '@/components/search-input'
+import { useInfiniteScroll } from '@/features/products/hooks/use-infinite-scroll'
+import { useProducts } from '@/features/products/hooks/use-products'
 
-import { useProductParams } from './hooks/use-product-params'
+import { useProductParams } from '@/features/products/hooks/use-product-params'
 
 export function ProductsSearch() {
   const { query, setSearch, sortBy, sortOrder, setSort } = useProductParams()

@@ -1,4 +1,4 @@
-import { ProductsList } from '../features/products'
+import { ProductsList } from '@/features/products'
 
 export default function ProductsPage() {
   return (

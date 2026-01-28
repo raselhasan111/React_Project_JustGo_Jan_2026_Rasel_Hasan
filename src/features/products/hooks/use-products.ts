@@ -1,8 +1,8 @@
+import { type Product } from '@/api/products'
+import { type SortDirection } from '@/components/data-table'
+import { useCurrency } from '@/hooks/use-currency'
 import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { type Product } from '../../../api/products'
-import { type SortDirection } from '../../../components/data-table'
-import { useCurrency } from '../../../hooks/use-currency'
 
 export function useProducts() {
   const navigate = useNavigate()

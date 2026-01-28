@@ -1,9 +1,9 @@
-import { useState, type ReactNode } from 'react'
 import {
   CURRENCY_SYMBOLS,
   CurrencyContext,
   type Currency,
-} from '../../context/currency-context'
+} from '@/context/currency-context'
+import { useState, type ReactNode } from 'react'
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {
   const [currency, setCurrency] = useState<Currency>('USD')

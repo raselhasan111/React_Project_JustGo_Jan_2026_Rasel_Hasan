@@ -1,5 +1,5 @@
+import { ProductDetails } from '@/features/products'
 import { useParams } from 'react-router-dom'
-import { ProductDetails } from '../features/products'
 
 function ProductDetailsPage() {
   const { id } = useParams()

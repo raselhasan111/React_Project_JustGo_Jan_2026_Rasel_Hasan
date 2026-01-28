@@ -1,4 +1,4 @@
-import { ProductsSearch } from '../features/products/products-search'
+import { ProductsSearch } from '@/features/products/products-search'
 
 function ProductsSearchPage() {
   return (

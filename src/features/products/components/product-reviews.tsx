@@ -1,4 +1,4 @@
-import { type Review } from '../../../api/products'
+import { type Review } from '@/api/products'
 
 interface ProductReviewsProps {
   reviews: Review[]
