@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { type Product } from '../../../api/products'
+import { type SortDirection } from '../../../components/data-table'
 import { useCurrency } from '../../../hooks/use-currency'
 
 export function useProducts() {
@@ -12,6 +13,26 @@ export function useProducts() {
       navigate(`/products/${product.id}`)
     },
     [navigate]
+  )
+
+  const getSortedData = useCallback(
+    (data: Product[], sortBy: string, sortOrder: SortDirection) => {
+      if (!sortBy || !sortOrder) {
+        return data
+      }
+
+      return [...data].sort((a, b) => {
+        const aValue = a[sortBy as keyof Product]
+        const bValue = b[sortBy as keyof Product]
+
+        if (typeof aValue === 'number' && typeof bValue === 'number') {
+          return sortOrder === 'asc' ? aValue - bValue : bValue - aValue
+        }
+
+        return 0
+      })
+    },
+    []
   )
 
   const columns = useMemo(
@@ -28,6 +49,7 @@ export function useProducts() {
         key: 'price',
         header: 'Price',
         render: (product: Product) => `${symbol}${product.price.toFixed(2)}`,
+        sortable: true,
       },
       {
         key: 'discountPercentage',
@@ -51,5 +73,6 @@ export function useProducts() {
   return {
     columns,
     handleRowClick,
+    getSortedData,
   }
 }

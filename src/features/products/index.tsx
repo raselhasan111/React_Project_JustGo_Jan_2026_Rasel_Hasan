@@ -1,25 +1,58 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchProducts, type Product } from '../../api/products'
+import { type Product } from '../../api/products'
 import { DataTable } from '../../components/data-table'
+import { InfiniteScrollFooter } from '../../components/infinite-scroll-footer'
+import { useInfiniteScroll } from './hooks/use-infinite-scroll'
+import { useProductParams } from './hooks/use-product-params'
 import { useProducts } from './hooks/use-products'
+import { ProductFilters } from './product-filters'
 
 export { ProductDetails } from './product-details'
 
 export function ProductsList() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['products'],
-    queryFn: () => fetchProducts(),
-  })
+  const { category, setCategory, sortBy, sortOrder, setSort } =
+    useProductParams()
 
-  const { columns, handleRowClick } = useProducts()
+  const {
+    products,
+    isLoading,
+    error,
+    isFetchingNextPage,
+    hasNextPage,
+    observerTarget,
+  } = useInfiniteScroll({ category })
+
+  const { columns, handleRowClick, getSortedData } = useProducts()
+
+  const displayData = getSortedData(products, sortBy, sortOrder)
 
   return (
-    <DataTable<Product>
-      data={data?.products ?? []}
-      columns={columns}
-      isLoading={isLoading}
-      error={error}
-      onRowClick={handleRowClick}
-    />
+    <div className="space-y-6">
+      <div className="flex justify-end gap-4">
+        <ProductFilters
+          selectedCategory={category}
+          onCategoryChange={setCategory}
+        />
+      </div>
+      <DataTable<Product>
+        data={displayData}
+        columns={columns}
+        isLoading={isLoading}
+        error={error}
+        onRowClick={handleRowClick}
+        rowKey="id"
+        onSort={(key, direction) => setSort(key, direction)}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
+      />
+      <InfiniteScrollFooter
+        ref={observerTarget}
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage}
+        hasData={products.length > 0}
+        isLoading={isLoading}
+        loadingMessage="Loading more products..."
+        endMessage="No more products to load"
+      />
+    </div>
   )
 }

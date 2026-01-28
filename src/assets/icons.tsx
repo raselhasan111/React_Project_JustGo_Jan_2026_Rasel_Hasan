@@ -17,3 +17,22 @@ export function SearchIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
+export function CloseIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="3"
+        d="M6 6l8 8m0-8L6 14"
+      />
+    </svg>
+  )
+}
