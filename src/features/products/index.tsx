@@ -1,12 +1,12 @@
-import { type Product } from '../../api/products'
-import { DataTable } from '../../components/data-table'
-import { InfiniteScrollFooter } from '../../components/infinite-scroll-footer'
-import { useInfiniteScroll } from './hooks/use-infinite-scroll'
-import { useProductParams } from './hooks/use-product-params'
-import { useProducts } from './hooks/use-products'
-import { ProductFilters } from './product-filters'
+import { type Product } from '@/api/products'
+import { DataTable } from '@/components/data-table'
+import { InfiniteScrollFooter } from '@/components/infinite-scroll-footer'
+import { useInfiniteScroll } from '@/features/products/hooks/use-infinite-scroll'
+import { useProductParams } from '@/features/products/hooks/use-product-params'
+import { useProducts } from '@/features/products/hooks/use-products'
+import { ProductFilters } from '@/features/products/product-filters'
 
-export { ProductDetails } from './product-details'
+export { ProductDetails } from '@/features/products/product-details'
 
 export function ProductsList() {
   const { category, setCategory, sortBy, sortOrder, setSort } =

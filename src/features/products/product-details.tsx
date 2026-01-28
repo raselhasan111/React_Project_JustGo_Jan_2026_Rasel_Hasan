@@ -1,9 +1,9 @@
+import { fetchProductById } from '@/api/products'
+import { ProductImages } from '@/features/products/components/product-images'
+import { ProductInfo } from '@/features/products/components/product-info'
+import { ProductReviews } from '@/features/products/components/product-reviews'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { fetchProductById } from '../../api/products'
-import { ProductImages } from './components/product-images'
-import { ProductInfo } from './components/product-info'
-import { ProductReviews } from './components/product-reviews'
 
 interface ProductDetailsProps {
   id: string

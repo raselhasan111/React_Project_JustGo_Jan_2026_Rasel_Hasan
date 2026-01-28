@@ -1,6 +1,6 @@
+import { SearchIcon } from '@/assets/icons'
+import { useDebouncedValue } from '@/hooks/use-debounce'
 import { useEffect, useState } from 'react'
-import { SearchIcon } from '../assets/icons'
-import { useDebouncedValue } from '../hooks/use-debounce'
 
 interface SearchInputProps {
   value: string

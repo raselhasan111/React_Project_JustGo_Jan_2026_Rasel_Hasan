@@ -1,5 +1,5 @@
-import { Select } from '../../components/select'
-import { useCategories } from './hooks/use-categories'
+import { Select } from '@/components/select'
+import { useCategories } from '@/features/products/hooks/use-categories'
 
 interface ProductFiltersProps {
   selectedCategory: string

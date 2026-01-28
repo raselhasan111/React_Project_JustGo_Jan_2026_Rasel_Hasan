@@ -1,6 +1,6 @@
+import { fetchCategories } from '@/api/products'
+import { type SelectOption } from '@/components/select'
 import { useQuery } from '@tanstack/react-query'
-import { fetchCategories } from '../../../api/products'
-import { type SelectOption } from '../../../components/select'
 
 export function useCategories() {
   const {

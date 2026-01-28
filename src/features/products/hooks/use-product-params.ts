@@ -1,5 +1,5 @@
-import { type SortDirection } from '../../../components/data-table'
-import { useRouteSearchParams } from '../../../hooks/use-route-search-params'
+import { type SortDirection } from '@/components/data-table'
+import { useRouteSearchParams } from '@/hooks/use-route-search-params'
 
 export function useProductParams() {
   const { getParam, updateParams } = useRouteSearchParams()

@@ -1,6 +1,6 @@
-import { RadioGroup, type RadioOption } from '../../../components/radio-group'
-import { type Currency } from '../../../context/currency-context'
-import { useCurrency } from '../../../hooks/use-currency'
+import { RadioGroup, type RadioOption } from '@/components/radio-group'
+import { type Currency } from '@/context/currency-context'
+import { useCurrency } from '@/hooks/use-currency'
 
 export function CurrencySettings() {
   const { currency, setCurrency } = useCurrency()

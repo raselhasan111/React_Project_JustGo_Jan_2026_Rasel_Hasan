@@ -1,5 +1,5 @@
-import { type Product } from '../../../api/products'
-import { useCurrency } from '../../../hooks/use-currency'
+import { type Product } from '@/api/products'
+import { useCurrency } from '@/hooks/use-currency'
 
 interface ProductInfoProps {
   product: Product

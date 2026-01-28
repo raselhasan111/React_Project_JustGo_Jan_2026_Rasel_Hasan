@@ -1,5 +1,5 @@
+import { CurrencyContext } from '@/context/currency-context'
 import { useContext } from 'react'
-import { CurrencyContext } from '../context/currency-context'
 
 export function useCurrency() {
   const context = useContext(CurrencyContext)
