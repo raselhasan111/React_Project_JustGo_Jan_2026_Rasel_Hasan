@@ -20,6 +20,7 @@ export function ProductsList() {
       isLoading={isLoading}
       error={error}
       onRowClick={handleRowClick}
+      rowKey="id"
     />
   )
 }

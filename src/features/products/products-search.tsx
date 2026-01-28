@@ -43,6 +43,7 @@ export function ProductsSearch() {
         isLoading={isLoading}
         error={error}
         onRowClick={handleRowClick}
+        rowKey="id"
       />
     </div>
   )

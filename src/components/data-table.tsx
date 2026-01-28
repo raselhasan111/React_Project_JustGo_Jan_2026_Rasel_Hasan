@@ -12,6 +12,7 @@ interface DataTableProps<T> {
   isLoading?: boolean
   error?: Error | null
   onRowClick?: (item: T) => void
+  rowKey: keyof T
 }
 
 export function DataTable<T extends object>({
@@ -20,6 +21,7 @@ export function DataTable<T extends object>({
   isLoading,
   error,
   onRowClick,
+  rowKey,
 }: DataTableProps<T>) {
   const deferredData = useDeferredValue(data)
 
@@ -63,9 +65,9 @@ export function DataTable<T extends object>({
           </tr>
         </thead>
         <tbody>
-          {deferredData.map((item, index) => (
+          {deferredData.map((item) => (
             <tr
-              key={index}
+              key={String(item[rowKey])}
               onClick={() => onRowClick?.(item)}
               className={`hover:bg-gray-50 transition-colors ${
                 onRowClick ? 'cursor-pointer' : ''
