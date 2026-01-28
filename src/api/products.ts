@@ -49,14 +49,18 @@ export interface ProductsResponse {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-export async function fetchProducts(options?: {
+export async function fetchProducts(
+  limit: number,
+  skip: number,
   query?: string
-}): Promise<ProductsResponse> {
-  const { query } = options || {}
+): Promise<ProductsResponse> {
+  const params = new URLSearchParams()
+  params.append('limit', limit.toString())
+  params.append('skip', skip.toString())
 
   const url = query
-    ? `${API_BASE_URL}/products/search?q=${query}`
-    : `${API_BASE_URL}/products`
+    ? `${API_BASE_URL}/products/search?q=${query}&${params.toString()}`
+    : `${API_BASE_URL}/products?${params.toString()}`
 
   const response = await fetch(url)
   if (!response.ok) {
@@ -66,9 +70,15 @@ export async function fetchProducts(options?: {
 }
 
 export async function fetchProductsByCategory(
-  category: string
+  category: string,
+  limit: number,
+  skip: number
 ): Promise<ProductsResponse> {
-  const url = `${API_BASE_URL}/products/category/${category}`
+  const params = new URLSearchParams()
+  params.append('limit', limit.toString())
+  params.append('skip', skip.toString())
+
+  const url = `${API_BASE_URL}/products/category/${category}?${params.toString()}`
 
   const response = await fetch(url)
   if (!response.ok) {
